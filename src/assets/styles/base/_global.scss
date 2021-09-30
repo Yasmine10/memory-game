@@ -4,6 +4,7 @@ body {
 }
 
 h1 {
+    font-size: 1.5rem;
 }
 
 h2 {
@@ -11,6 +12,7 @@ h2 {
 
 h3 {
     font-size: 0.9375em;
+    color: var(--clr-neutral-grey);
 }
 
 .btn {
@@ -19,6 +21,9 @@ h3 {
     padding: 0.75em 1.25em;
     font-weight: var(--fw-bold);
     text-align: center;
+}
+
+.btn-full-width {
     margin: 0 auto;
     width: 100%;
 }

@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap");
+
+:root {
+    // colors
+    --clr-primary: hsl(37, 98%, 54%);
+    --clr-secondary: hsl(203, 25%, 90%);
+    --clr-extra-dark: hsl(206, 45%, 15%);
+    --clr-dark: hsl(205, 30%, 27%);
+    --clr-neutral-light-grey: hsl(203, 28%, 79%);
+    --clr-neutral-grey: hsl(203, 22%, 55%);
+    --clr-neutral-blue: hsl(205, 37%, 55%);
+    --clr-light: hsl(0, 0%, 95%);
+    --clr-white: hsl(0, 0%, 99%);
+
+    // fonts
+
+    --ff-primary: "Atkinson Hyperlegible", sans-serif;
+
+    --fw-regular: 400;
+    --fw-bold: 700;
+}

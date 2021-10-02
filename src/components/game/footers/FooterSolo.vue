@@ -2,11 +2,11 @@
   <div id="footer">
     <div class="time-left">
       <h3>Time</h3>
-      <p class="number">1:53</p>
+      <p class="number">0:00</p>
     </div>
     <div class="moves">
       <h3>Moves</h3>
-      <p class="number">39</p>
+      <p class="number">{{ moves }}</p>
     </div>
   </div>
 </template>
@@ -14,6 +14,11 @@
 <script>
 export default {
   name: "FooterSolo",
+  computed: {
+    moves() {
+      return this.$store.state.moves;
+    },
+  },
 };
 </script>
 

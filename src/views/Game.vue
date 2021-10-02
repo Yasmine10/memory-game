@@ -4,54 +4,35 @@
       <h1>memory</h1>
       <button class="btn btn-primary">Menu</button>
     </div>
-    <div class="game"></div>
-    <FooterMulti />
+    <div class="game">
+      <MemoryCards />
+    </div>
+    <!-- <FooterMulti /> -->
     <FooterSolo />
   </div>
 </template>
 
 <script>
-import FooterMulti from "../components/game/footers/FooterMulti.vue";
+import MemoryCards from "../components/game/GameBoard.vue";
+// import FooterMulti from "../components/game/footers/FooterMulti.vue";
 import FooterSolo from "../components/game/footers/FooterSolo.vue";
 
 export default {
   name: "Game",
-  components: { FooterMulti, FooterSolo },
-  created() {
-    this.generateCards();
+  components: {
+    MemoryCards,
+    // FooterMulti,
+    FooterSolo,
   },
-  computed: {
-    selectedTheme() {
-      return this.$store.state.theme;
-    },
-    selectedNumberOfPlayers() {
-      return this.$store.state.numberOfPlayers;
-    },
-    selectedGridSize() {
-      return this.$store.state.gridSize;
-    },
-  },
-  methods: {
-    generateCards() {
-      let maxNumbers = 20;
-      let maxArray = 8;
-      let numbersArray = [];
-
-      for (let i = 0; i < maxArray; i++) {
-        let randomNumber = Math.floor(Math.random() * maxNumbers);
-        numbersArray.push(randomNumber);
-      }
-
-      numbersArray = [...numbersArray, ...numbersArray];
-      console.log(numbersArray);
-    },
-  },
+  created() {},
+  computed: {},
+  methods: {},
 };
 </script>
 
 <style lang="scss" scoped>
 #game {
-  //height: 100vh;
+  height: 95vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

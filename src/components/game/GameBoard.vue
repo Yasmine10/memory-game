@@ -34,12 +34,18 @@
         <div class="back"></div>
       </div>
     </div>
+    <EndGame v-if="showEndGame" @close="showEndGame = false" />
   </div>
 </template>
 
 <script>
+import EndGame from "./modals/EndGame.vue";
+
 export default {
   name: "GameBoard",
+  components: {
+    EndGame,
+  },
   data() {
     return {
       cards: [],
@@ -47,6 +53,7 @@ export default {
       numberOfCardsFlipped: 0,
       moves: 0,
       remainingPairs: 0,
+      showEndGame: true,
     };
   },
   created() {
@@ -139,7 +146,8 @@ export default {
       }
 
       if (this.remainingPairs === 0) {
-        alert("You won");
+        this.showEndGame = !this.showEndGame;
+        // alert("You won");
       }
     },
   },

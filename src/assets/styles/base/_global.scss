@@ -5,6 +5,7 @@ body {
 
 h1 {
     font-size: 1.5rem;
+    color: var(--clr-extra-dark);
 }
 
 h2 {
@@ -41,7 +42,7 @@ h3 {
 
 .btn-secondary {
     background-color: var(--clr-secondary);
-    color: var(--clr-extra-dark);
+    color: var(--clr-dark);
 
     &:hover {
         background-color: var(--clr-neutral-blue);

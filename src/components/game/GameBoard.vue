@@ -66,7 +66,6 @@ export default {
     this.$store.dispatch("setRemainingPairs", this.cardPairs);
     this.remainingPairs = this.$store.state.remainingPairs;
     this.moves = this.$store.state.moves;
-    console.log(this.$store.state.remainingPairs);
   },
   computed: {
     theme() {
@@ -148,7 +147,6 @@ export default {
       if (this.remainingPairs === 0) {
         this.showEndGame = !this.showEndGame;
         this.$store.dispatch("setIsTimeRunning", false);
-        // alert("You won");
       }
     },
   },

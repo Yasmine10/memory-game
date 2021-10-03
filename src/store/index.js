@@ -67,7 +67,6 @@ export default createStore({
         },
         setRemainingPairs(state, payload) {
             state.remainingPairs = Number(payload);
-            console.log(state.remainingPairs);
         },
         setMoves(state, payload) {
             state.moves += Number(payload);
@@ -150,7 +149,6 @@ export default createStore({
             state.cards.forEach((card, index) => {
                 card.position = index;
             });
-            console.log("after shuffle", state.cards);
             commit("shuffleCards", state.cards);
         },
         setCardFlipped({ commit }, payload) {

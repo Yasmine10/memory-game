@@ -7,12 +7,6 @@
 <script>
 export default {
   name: "Timer",
-  props: {
-    // isTimeRunning: {
-    //   required: true,
-    //   type: Boolean,
-    // },
-  },
   created() {
     this.time = this.$store.state.time;
     this.isRunning = this.isTimeRunning;
@@ -26,16 +20,12 @@ export default {
     };
   },
   computed: {
-    // time() {
-    //   return this.$store.state.time;
-    // },
     isTimeRunning() {
       return this.$store.state.isTimeRunning;
     },
   },
   watch: {
     isTimeRunning(value) {
-      console.log(value);
       if (value == true) {
         this.interval = setInterval(this.incrementTime, 1000);
       } else {

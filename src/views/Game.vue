@@ -8,8 +8,10 @@
     <div class="game">
       <MemoryCards />
     </div>
+    <div class="footer">
+      <FooterSolo />
+    </div>
     <!-- <FooterMulti /> -->
-    <FooterSolo />
   </div>
 </template>
 
@@ -44,27 +46,34 @@ export default {
 
 <style lang="scss" scoped>
 #game {
-  height: 95vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin-top: 1em;
-  margin-bottom: 1em;
+  padding-top: 1em;
+  padding-bottom: 1em;
 
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex: 0 0 3rem;
 
     .btn {
       padding: 0.5em 1.25em;
     }
   }
 
-  .footer {
+  .game {
+    flex: 1 1 auto;
     display: flex;
-    flex-direction: row;
-    gap: 1em;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .footer {
+    flex: 0 0 2rem;
+    margin-top: auto;
   }
 }
 </style>

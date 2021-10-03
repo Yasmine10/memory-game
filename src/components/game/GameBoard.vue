@@ -164,6 +164,11 @@ export default {
       perspective: 1000;
       cursor: pointer;
 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2em;
+
       .front,
       .back {
         backface-visibility: hidden;
@@ -218,7 +223,8 @@ export default {
   }
 
   .cards-list-small {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
 
     .card-item {
       min-height: 4.5rem;

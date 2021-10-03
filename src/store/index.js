@@ -20,6 +20,19 @@ export default createStore({
             state.numberOfPlayers = Number(payload.numberOfPlayers);
             state.gridSize = payload.gridSize;
         },
+        restartGame(state) {
+            // only solo
+            state.cards.forEach((item) => {
+                item.flipped = false;
+                item.matched = false;
+            });
+
+            state.numberOfCardsFlipped = 0;
+            state.cardsFlipped.length = 0;
+            state.remainingPairs = state.cards.length / 2;
+            state.moves = 0;
+            state.time = 0;
+        },
         setCards(state, payload) {},
         shuffleCards(state, payload) {},
         setCardFlipped(state, payload) {
@@ -65,7 +78,14 @@ export default createStore({
         newGame({ commit }, payload) {
             commit("newGame", payload);
         },
+        restartGame({ commit }) {
+            commit("restartGame");
+        },
         setCards({ commit, state }) {
+            //empty cards array
+            state.cards.length = 0;
+
+            // fill cards array with icons or numbers
             if (state.theme === "icons") {
                 for (let i = 0; i < state.gridSize * 2; i++) {
                     state.cards.push({

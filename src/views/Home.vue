@@ -24,6 +24,7 @@
             </div>
           </div>
         </section>
+        <!--
         <section class="number-of-players">
           <h3>Number of Players</h3>
           <div class="flex">
@@ -69,6 +70,7 @@
             </div>
           </div>
         </section>
+        -->
         <section class="grid-size">
           <h3>Grid Size</h3>
           <div class="flex">
@@ -124,7 +126,7 @@ export default {
   methods: {
     startGame() {
       this.$store
-        .dispatch("startGame", {
+        .dispatch("newGame", {
           theme: this.theme,
           numberOfPlayers: this.numberOfPlayers,
           gridSize: this.gridSize,
@@ -151,7 +153,7 @@ export default {
 
   .menu-container {
     background-color: var(--clr-white);
-    border-radius: 15px;
+    border-radius: 0.9375rem;
     padding: 1.5em;
 
     .flex {

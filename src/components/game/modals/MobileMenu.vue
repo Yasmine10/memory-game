@@ -11,6 +11,9 @@
 <script>
 export default {
   name: "MobileMenu",
+  created() {
+    this.$store.dispatch("setIsTimeRunning", false);
+  },
   methods: {
     restartGame() {
       this.$store.dispatch("restartGame").then(() => this.close());
@@ -19,6 +22,7 @@ export default {
       this.$router.push("/");
     },
     close() {
+      this.$store.dispatch("setIsTimeRunning", true);
       this.$emit("close");
     },
   },
@@ -40,7 +44,7 @@ export default {
   justify-content: center;
 
   .modal-container {
-    background-color: var(--clr-white);
+    background-color: var(--clr-light);
     border-radius: 0.9375rem;
     padding: 1.5em;
 

@@ -7,6 +7,7 @@ export default createStore({
         numberOfPlayers: 1,
         gridSize: 16,
         time: 0,
+        isTimeRunning: 0,
         moves: 0,
         players: [],
         cards: [],
@@ -19,6 +20,7 @@ export default createStore({
             state.theme = payload.theme;
             state.numberOfPlayers = Number(payload.numberOfPlayers);
             state.gridSize = payload.gridSize;
+            state.isTimeRunning = true;
         },
         restartGame(state) {
             // only solo
@@ -72,6 +74,12 @@ export default createStore({
         },
         resetMoves(state) {
             state.moves = 0;
+        },
+        updateTime(state, payload) {
+            state.time = payload;
+        },
+        setIsTimeRunning(state, payload) {
+            state.isTimeRunning = payload;
         },
     },
     actions: {
@@ -168,6 +176,12 @@ export default createStore({
         },
         resetMoves({ commit }) {
             commit("resetMoves");
+        },
+        updateTime({ commit }, payload) {
+            commit("updateTime", payload);
+        },
+        setIsTimeRunning({ commit }, payload) {
+            commit("setIsTimeRunning", payload);
         },
     },
     getters: {

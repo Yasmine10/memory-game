@@ -53,7 +53,7 @@ export default {
       numberOfCardsFlipped: 0,
       moves: 0,
       remainingPairs: 0,
-      showEndGame: true,
+      showEndGame: false,
     };
   },
   created() {
@@ -147,6 +147,7 @@ export default {
 
       if (this.remainingPairs === 0) {
         this.showEndGame = !this.showEndGame;
+        this.$store.dispatch("setIsTimeRunning", false);
         // alert("You won");
       }
     },

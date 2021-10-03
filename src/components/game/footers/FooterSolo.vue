@@ -2,7 +2,7 @@
   <div id="footer">
     <div class="time-left">
       <h3>Time</h3>
-      <p class="number">0:00</p>
+      <Timer class="number" />
     </div>
     <div class="moves">
       <h3>Moves</h3>
@@ -12,8 +12,13 @@
 </template>
 
 <script>
+import Timer from "../Timer.vue";
+
 export default {
   name: "FooterSolo",
+  components: {
+    Timer,
+  },
   computed: {
     moves() {
       return this.$store.state.moves;

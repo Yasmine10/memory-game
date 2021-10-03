@@ -8,7 +8,7 @@
       <div class="main">
         <div class="time">
           <h3>Time Elapsed</h3>
-          <p>0:00</p>
+          <p>{{ formatTime() }}</p>
         </div>
         <div class="moves">
           <h3>Moves Taken</h3>
@@ -28,6 +28,9 @@ export default {
     moves() {
       return this.$store.state.moves;
     },
+    time() {
+      return this.$store.state.time;
+    },
   },
   methods: {
     restartGame() {
@@ -38,6 +41,17 @@ export default {
     },
     close() {
       this.$emit("close");
+    },
+    formatTime() {
+      const time = this.time;
+
+      const minutes = Math.floor(time / 60);
+      let seconds = time % 60;
+      if (seconds < 10) {
+        seconds = `0${seconds}`;
+      }
+
+      return `${minutes}:${seconds}`;
     },
   },
 };

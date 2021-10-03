@@ -3,9 +3,9 @@ import icons from "../assets/icons";
 
 export default createStore({
     state: {
-        theme: "icons",
+        theme: "numbers",
         numberOfPlayers: 1,
-        gridSize: 4,
+        gridSize: 16,
         time: 0,
         moves: 0,
         players: [],
@@ -33,8 +33,8 @@ export default createStore({
             state.moves = 0;
             state.time = 0;
         },
-        setCards(state, payload) {},
-        shuffleCards(state, payload) {},
+        setCards() {},
+        shuffleCards() {},
         setCardFlipped(state, payload) {
             let card = state.cards.find(
                 (item) => item.position === payload.position
@@ -87,7 +87,7 @@ export default createStore({
 
             // fill cards array with icons or numbers
             if (state.theme === "icons") {
-                for (let i = 0; i < state.gridSize * 2; i++) {
+                for (let i = 0; i < state.gridSize / 2; i++) {
                     state.cards.push({
                         id: i,
                         value: icons[i],
@@ -104,9 +104,9 @@ export default createStore({
                     });
                 }
             } else {
-                for (let i = 0; i < state.gridSize * 2; ) {
+                for (let i = 0; i < state.gridSize / 2; ) {
                     let randomNumber = Math.floor(
-                        Math.random() * (state.gridSize * 2)
+                        Math.random() * (state.gridSize / 2)
                     );
                     if (
                         !(
@@ -136,11 +136,13 @@ export default createStore({
             commit("setCards", state.cards);
         },
         shuffleCards({ commit, state }) {
-            state.cards.sort(() => Math.random() - 0.1);
+            state.cards.sort(() => Math.random() - 0.5);
+            state.cards.sort(() => Math.random() - 0.5);
 
             state.cards.forEach((card, index) => {
                 card.position = index;
             });
+            console.log("after shuffle", state.cards);
             commit("shuffleCards", state.cards);
         },
         setCardFlipped({ commit }, payload) {

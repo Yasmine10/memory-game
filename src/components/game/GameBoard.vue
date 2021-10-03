@@ -1,15 +1,32 @@
 <template>
   <div id="memorycards">
-    <div class="cards-list">
+    <div
+      class="cards-list"
+      :class="{
+        'cards-list-small': gridSize == 16,
+        'cards-list-large': gridSize == 36,
+      }"
+    >
       <div
         class="card-item"
         v-for="card in cards"
         :key="card.position"
-        :class="{ flipped: card.flipped, matched: card.matched }"
+        :class="{
+          flipped: card.flipped,
+          matched: card.matched,
+          selected: card.flipped & !card.matched,
+        }"
         @click="flipCard(card)"
       >
         <div class="front" v-if="theme === 'icons'">
-          <font-awesome-icon class="icon fa-3x" :icon="['fas', card.value]" />
+          <font-awesome-icon
+            class="icon"
+            :icon="['fas', card.value]"
+            :class="{
+              'fa-3x': gridSize == 16,
+              'fa-lg': gridSize == 36,
+            }"
+          />
         </div>
         <div class="front" v-else>
           <span>{{ card.value }}</span>
@@ -17,12 +34,18 @@
         <div class="back"></div>
       </div>
     </div>
+    <EndGame v-if="showEndGame" @close="showEndGame = false" />
   </div>
 </template>
 
 <script>
+import EndGame from "./modals/EndGame.vue";
+
 export default {
   name: "GameBoard",
+  components: {
+    EndGame,
+  },
   data() {
     return {
       cards: [],
@@ -30,6 +53,7 @@ export default {
       numberOfCardsFlipped: 0,
       moves: 0,
       remainingPairs: 0,
+      showEndGame: false,
     };
   },
   created() {
@@ -48,12 +72,15 @@ export default {
     theme() {
       return this.$store.state.theme;
     },
+    gridSize() {
+      return this.$store.state.gridSize;
+    },
     cardPairs() {
       return this.$store.getters["getCardPairs"];
     },
   },
   methods: {
-    flipCard(card, index) {
+    flipCard(card) {
       // check if there are less than 2 flipped cards, then flip card
       if (this.numberOfCardsFlipped < 2) {
         this.numberOfCardsFlipped = this.numberOfCardsFlipped + 1;
@@ -119,7 +146,9 @@ export default {
       }
 
       if (this.remainingPairs === 0) {
-        alert("You won");
+        this.showEndGame = !this.showEndGame;
+        this.$store.dispatch("setIsTimeRunning", false);
+        // alert("You won");
       }
     },
   },
@@ -130,14 +159,11 @@ export default {
 #memorycards {
   .cards-list {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 1em;
 
     .card-item {
       width: 100%;
-
       perspective: 1000;
-      min-height: 4.5rem;
       cursor: pointer;
 
       .front,
@@ -147,10 +173,8 @@ export default {
         transform-style: preserve-3d;
 
         position: absolute;
-
         content: "";
-        width: 4.5rem;
-        height: 4.5rem;
+
         border-radius: 50%;
         text-align: center;
         padding-top: 0.75em;
@@ -158,17 +182,14 @@ export default {
 
       .front {
         background-color: var(--clr-neutral-light-grey);
-
         transform: rotateY(-180deg);
 
         .icon {
-          size: 3rem;
           color: var(--clr-white);
         }
 
         span {
           color: var(--clr-white);
-          font-size: 3em;
         }
       }
 
@@ -193,6 +214,54 @@ export default {
       &.selected {
         .front {
           background-color: var(--clr-primary);
+        }
+      }
+    }
+  }
+
+  .cards-list-small {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    .card-item {
+      min-height: 4.5rem;
+
+      .front,
+      .back {
+        width: 4.5rem;
+        height: 4.5rem;
+      }
+
+      .front {
+        .icon {
+          size: 7rem;
+        }
+
+        span {
+          font-size: 3em;
+        }
+      }
+    }
+  }
+
+  .cards-list-large {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+    .card-item {
+      min-height: 2.9rem;
+
+      .front,
+      .back {
+        width: 2.9rem;
+        height: 2.9rem;
+      }
+
+      .front {
+        .icon {
+          size: 1.4rem;
+        }
+
+        span {
+          font-size: 1.4em;
         }
       }
     }

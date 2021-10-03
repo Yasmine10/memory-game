@@ -3,10 +3,11 @@ import icons from "../assets/icons";
 
 export default createStore({
     state: {
-        theme: "icons",
+        theme: "numbers",
         numberOfPlayers: 1,
-        gridSize: 4,
+        gridSize: 16,
         time: 0,
+        isTimeRunning: 0,
         moves: 0,
         players: [],
         cards: [],
@@ -19,9 +20,23 @@ export default createStore({
             state.theme = payload.theme;
             state.numberOfPlayers = Number(payload.numberOfPlayers);
             state.gridSize = payload.gridSize;
+            state.isTimeRunning = true;
         },
-        setCards(state, payload) {},
-        shuffleCards(state, payload) {},
+        restartGame(state) {
+            // only solo
+            state.cards.forEach((item) => {
+                item.flipped = false;
+                item.matched = false;
+            });
+
+            state.numberOfCardsFlipped = 0;
+            state.cardsFlipped.length = 0;
+            state.remainingPairs = state.cards.length / 2;
+            state.moves = 0;
+            state.time = 0;
+        },
+        setCards() {},
+        shuffleCards() {},
         setCardFlipped(state, payload) {
             let card = state.cards.find(
                 (item) => item.position === payload.position
@@ -60,14 +75,27 @@ export default createStore({
         resetMoves(state) {
             state.moves = 0;
         },
+        updateTime(state, payload) {
+            state.time = payload;
+        },
+        setIsTimeRunning(state, payload) {
+            state.isTimeRunning = payload;
+        },
     },
     actions: {
         newGame({ commit }, payload) {
             commit("newGame", payload);
         },
+        restartGame({ commit }) {
+            commit("restartGame");
+        },
         setCards({ commit, state }) {
+            //empty cards array
+            state.cards.length = 0;
+
+            // fill cards array with icons or numbers
             if (state.theme === "icons") {
-                for (let i = 0; i < state.gridSize * 2; i++) {
+                for (let i = 0; i < state.gridSize / 2; i++) {
                     state.cards.push({
                         id: i,
                         value: icons[i],
@@ -84,9 +112,9 @@ export default createStore({
                     });
                 }
             } else {
-                for (let i = 0; i < state.gridSize * 2; ) {
+                for (let i = 0; i < state.gridSize / 2; ) {
                     let randomNumber = Math.floor(
-                        Math.random() * (state.gridSize * 2)
+                        Math.random() * (state.gridSize / 2)
                     );
                     if (
                         !(
@@ -116,11 +144,13 @@ export default createStore({
             commit("setCards", state.cards);
         },
         shuffleCards({ commit, state }) {
-            state.cards.sort(() => Math.random() - 0.1);
+            state.cards.sort(() => Math.random() - 0.5);
+            state.cards.sort(() => Math.random() - 0.5);
 
             state.cards.forEach((card, index) => {
                 card.position = index;
             });
+            console.log("after shuffle", state.cards);
             commit("shuffleCards", state.cards);
         },
         setCardFlipped({ commit }, payload) {
@@ -146,6 +176,12 @@ export default createStore({
         },
         resetMoves({ commit }) {
             commit("resetMoves");
+        },
+        updateTime({ commit }, payload) {
+            commit("updateTime", payload);
+        },
+        setIsTimeRunning({ commit }, payload) {
+            commit("setIsTimeRunning", payload);
         },
     },
     getters: {

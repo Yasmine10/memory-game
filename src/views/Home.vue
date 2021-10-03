@@ -24,6 +24,7 @@
             </div>
           </div>
         </section>
+        <!--
         <section class="number-of-players">
           <h3>Number of Players</h3>
           <div class="flex">
@@ -69,15 +70,28 @@
             </div>
           </div>
         </section>
+        -->
         <section class="grid-size">
           <h3>Grid Size</h3>
           <div class="flex">
             <div class="btn-selection">
-              <input type="radio" id="4x4" name="gridSize" value="4" v-model="gridSize" />
+              <input
+                type="radio"
+                id="4x4"
+                name="gridSize"
+                value="16"
+                v-model="gridSize"
+              />
               <label for="4x4">4x4</label>
             </div>
             <div class="btn-selection">
-              <input type="radio" id="6x6" name="gridSize" value="6" v-model="gridSize" />
+              <input
+                type="radio"
+                id="6x6"
+                name="gridSize"
+                value="36"
+                v-model="gridSize"
+              />
               <label for="6x6">6x6</label>
             </div>
           </div>
@@ -102,7 +116,7 @@ export default {
     return {
       theme: "",
       numberOfPlayers: 0,
-      gridSize: 4,
+      gridSize: 0,
     };
   },
   created() {
@@ -124,7 +138,7 @@ export default {
   methods: {
     startGame() {
       this.$store
-        .dispatch("startGame", {
+        .dispatch("newGame", {
           theme: this.theme,
           numberOfPlayers: this.numberOfPlayers,
           gridSize: this.gridSize,
@@ -151,7 +165,7 @@ export default {
 
   .menu-container {
     background-color: var(--clr-white);
-    border-radius: 15px;
+    border-radius: 0.9375rem;
     padding: 1.5em;
 
     .flex {

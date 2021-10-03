@@ -157,7 +157,6 @@ export default {
 #memorycards {
   .cards-list {
     display: grid;
-    gap: 1em;
 
     .card-item {
       width: 100%;
@@ -167,7 +166,6 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 2em;
 
       .front,
       .back {
@@ -223,11 +221,12 @@ export default {
   }
 
   .cards-list-small {
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1em;
 
     .card-item {
       min-height: 4.5rem;
+      padding: 2em;
 
       .front,
       .back {
@@ -249,9 +248,11 @@ export default {
 
   .cards-list-large {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0em;
 
     .card-item {
       min-height: 2.9rem;
+      padding: 1.75em;
 
       .front,
       .back {

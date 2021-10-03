@@ -5,7 +5,7 @@ export default createStore({
     state: {
         theme: "numbers",
         numberOfPlayers: 1,
-        gridSize: 16,
+        gridSize: 36,
         time: 0,
         isTimeRunning: 0,
         moves: 0,

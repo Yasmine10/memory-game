@@ -1,14 +1,14 @@
 <template>
-  <div id="game" class="container">
-    <div class="header">
+  <div id="game" class="">
+    <div class="header container">
       <h1>memory</h1>
       <button class="btn btn-primary" @click.prevent="openMenu">Menu</button>
       <MobileMenu v-if="showMenu" @close="showMenu = false" />
     </div>
     <div class="game">
-      <MemoryCards />
+      <GameBoard />
     </div>
-    <div class="footer">
+    <div class="footer container">
       <FooterSolo />
     </div>
     <!-- <FooterMulti /> -->
@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import MemoryCards from "../components/game/GameBoard.vue";
+import GameBoard from "../components/game/GameBoard.vue";
 // import FooterMulti from "../components/game/footers/FooterMulti.vue";
 import FooterSolo from "../components/game/footers/FooterSolo.vue";
 import MobileMenu from "../components/game/modals/MobileMenu.vue";
@@ -24,7 +24,7 @@ import MobileMenu from "../components/game/modals/MobileMenu.vue";
 export default {
   name: "Game",
   components: {
-    MemoryCards,
+    GameBoard,
     // FooterMulti,
     FooterSolo,
     MobileMenu,
@@ -69,6 +69,8 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    padding-block: 0.25rem;
   }
 
   .footer {

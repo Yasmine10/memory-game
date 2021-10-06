@@ -191,12 +191,14 @@ export default {
 
 <style lang="scss" scoped>
 #memorycards {
+  width: 100%;
   .cards-list {
     display: grid;
+    justify-content: center;
 
     .card-item {
       width: 100%;
-      perspective: 1000;
+      //perspective: 1000;
       cursor: pointer;
 
       display: flex;
@@ -312,13 +314,13 @@ export default {
     gap: 0em;
 
     .card-item {
-      min-height: 2.9rem;
+      min-height: 3.2rem;
       padding: 1.75em;
 
       .front,
       .back {
-        width: 2.9rem;
-        height: 2.9rem;
+        width: 3.2rem;
+        height: 3.2rem;
       }
 
       .front {
@@ -333,7 +335,7 @@ export default {
 
       @media only screen and (min-width: 768px) {
         min-height: 5.1rem;
-        padding: 3.25em;
+        padding: 3em;
 
         .front,
         .back {

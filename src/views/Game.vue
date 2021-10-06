@@ -13,10 +13,10 @@
         </button>
       </div>
     </div>
-    <div class="game">
+    <div class="game container-small">
       <GameBoard />
     </div>
-    <div class="footer container">
+    <div class="footer container-small">
       <FooterSolo />
     </div>
     <!-- <FooterMulti /> -->

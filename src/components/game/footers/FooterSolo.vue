@@ -2,7 +2,7 @@
   <div id="footer">
     <div class="time-left">
       <h3>Time</h3>
-      <p class="number">{{ formatTime() }}</p>
+      <p class="number">{{ formatTime(this.time) }}</p>
     </div>
     <div class="moves">
       <h3>Moves</h3>
@@ -12,35 +12,19 @@
 </template>
 
 <script>
-// import Timer from "../Timer.vue";
+import {format} from "../../../mixins/formatTime";
 
 export default {
   name: "FooterSolo",
-  components: {
-    // Timer,
-  },
+  mixins: [format],
   computed: {
     moves() {
       return this.$store.state.moves;
     },
     time() {
-      // console.log(this.$store.state.time);
       return this.$store.state.time;
     }
   },
-  methods: {
-    formatTime() {
-      const time = this.time;
-    
-      const minutes = Math.floor(this.time / 60);
-      let seconds = time % 60;
-      if (seconds < 10) {
-        seconds = `0${seconds}`;
-      }
-    
-      return `${minutes}:${seconds}`;
-    },
-  }
 };
 </script>
 
@@ -74,7 +58,7 @@ export default {
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5em;
+      padding: 1em;
 
       h3 {
         font-size: 1.125rem;

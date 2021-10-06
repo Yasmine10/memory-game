@@ -3,10 +3,10 @@
     <div class="logo-container">
       <h1 class="white-logo">memory</h1>
     </div>
-    <div class="menu-container container">
+    <div class="menu-container container-medium">
       <form @submit.prevent="startGame">
         <section class="theme">
-          <h3>Theme</h3>
+          <h3>Select Theme</h3>
           <div class="flex">
             <div class="btn-selection">
               <input
@@ -108,8 +108,6 @@
 
 export default {
   name: "Home",
-  components: {
-  },
   data() {
     return {
       theme: "",
@@ -124,14 +122,11 @@ export default {
     this.gridSize = this.$store.state.gridSize;
   },
   watch: {
-    theme(value) {
-      console.log(value);
+    theme() {
     },
-    numberOfPlayers(value) {
-      console.log(value);
+    numberOfPlayers() {
     },
-    gridSize(value) {
-      console.log(value);
+    gridSize() {
     },
   },
   methods: {
@@ -188,10 +183,6 @@ export default {
     .flex {
       display: flex;
       margin-bottom: 2em;
-    }
-    
-    @media only screen and (min-width: 768px) {
-      max-width: 40.875rem;
     }
   }
 }

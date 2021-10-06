@@ -7,7 +7,6 @@ export default createStore({
     numberOfPlayers: 1,
     gridSize: 16,
     time: 0,
-    isRunning: false,
     timeInterval: null,
     moves: 0,
     players: [],
@@ -22,10 +21,9 @@ export default createStore({
       state.numberOfPlayers = Number(payload.numberOfPlayers);
       state.gridSize = payload.gridSize;
       state.moves = 0;
-      state.time = 0;
     },
     restartGame(state) {
-      // only solo
+      // only solo game
       state.moves = 0;
       state.numberOfCardsFlipped = 0;
       state.cardsFlipped = [];
@@ -35,13 +33,7 @@ export default createStore({
         item.flipped = false;
         item.matched = false;
       });
-      console.log(state.numberOfCardsFlipped);
-      console.log(state.cardsFlipped);
-      console.log(state.cards);
-      console.log(state.remainingPairs);
     },
-    setCards() { },
-    shuffleCards() { },
     setCardFlipped(state, payload) {
       let card = state.cards.find(
         (item) => item.position === payload.position
@@ -93,9 +85,6 @@ export default createStore({
     resetTimer(state) {
       state.time = 0;
     },
-    isTimeRunning(state) {
-      state.isRunning = !state.isRunning;
-    }
   },
   actions: {
     newGame({ commit }, payload) {
@@ -104,7 +93,7 @@ export default createStore({
     restartGame({ commit }) {
       commit("restartGame");
     },
-    setCards({ commit, state }) {
+    setCards({ state }) {
       //empty cards array
       state.cards.length = 0;
 
@@ -156,16 +145,14 @@ export default createStore({
           }
         }
       }
-      commit("setCards", state.cards);
     },
-    shuffleCards({ commit, state }) {
+    shuffleCards({ state }) {
       state.cards.sort(() => Math.random() - 0.5);
       state.cards.sort(() => Math.random() - 0.5);
 
       state.cards.forEach((card, index) => {
         card.position = index;
       });
-      commit("shuffleCards", state.cards);
     },
     setCardFlipped({ commit }, payload) {
       commit("setCardFlipped", payload);
@@ -205,9 +192,6 @@ export default createStore({
     resetTimer({commit}) {
       commit("resetTimer");
     },
-    isTimeRunning({commit}) {
-      commit("isTimeRunning");
-    }
   },
   getters: {
     getCardPairs: (state) => {

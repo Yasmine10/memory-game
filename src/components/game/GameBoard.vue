@@ -3,8 +3,8 @@
     <div
       class="cards-list"
       :class="{
-        'cards-list-small': gridSize == 16,
-        'cards-list-large': gridSize == 36,
+        'cards-list-small': gridSize === 16,
+        'cards-list-large': gridSize === 36,
       }"
     >
       <div
@@ -19,14 +19,11 @@
         @click="flipCard(card)"
       >
         <div class="front" v-if="theme === 'icons'">
-          <font-awesome-icon
-            class="icon"
-            :icon="['fas', card.value]"
-            :class="{
-              'fa-3x': gridSize == 16,
-              'fa-lg': gridSize == 36,
-            }"
-          />
+          <p class="icon">
+            <font-awesome-icon
+              :icon="['fas', card.value]"
+            />
+          </p>
         </div>
         <div class="front" v-else>
           <span>{{ card.value }}</span>
@@ -48,25 +45,11 @@ export default {
   },
   data() {
     return {
-      // cards: [],
-      // cardsFlipped: [],
-      // numberOfCardsFlipped: 0,
-      // moves: 0,
-      // remainingPairs: 0,
       showEndGame: false,
     };
   },
   created() {
-    // this.$store.dispatch("setCards");
-    // this.$store.dispatch("shuffleCards");
     this.showEndGame = false;
-
-    // this.cards = this.$store.state.cards;
-    // this.numberOfCardsFlipped = this.$store.state.numberOfCardsFlipped;
-    // this.cardsFlipped = this.$store.state.cardsFlipped;
-    // // this.$store.dispatch("setRemainingPairs", this.cardPairs);
-    // this.remainingPairs = this.$store.state.remainingPairs;
-    // this.moves = this.$store.state.moves;
   },
   computed: {
     theme() {
@@ -204,6 +187,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
+      align-content: center;
 
       .front,
       .back {
@@ -216,11 +200,6 @@ export default {
 
         border-radius: 50%;
         text-align: center;
-        padding-top: 0.75em;
-
-        @media only screen and (min-width: 768px) {
-          padding-top: 1.15em;
-        }
       }
 
       .front {
@@ -274,11 +253,12 @@ export default {
       .back {
         width: 4.5rem;
         height: 4.5rem;
+        padding-top: 0.75em;
       }
 
       .front {
         .icon {
-          size: 7rem;
+          font-size: 2.75rem;
         }
 
         span {
@@ -287,18 +267,19 @@ export default {
       }
 
       @media only screen and (min-width: 768px) {
-        min-height: 7.3rem;
-        padding: 4em;
+        min-height: 6.5rem;
+        padding: 3em;
 
         .front,
         .back {
-          width: 7.3rem;
-          height: 7.3rem;
+          width: 6.5rem;
+          height: 6.5rem;
+          padding-top: 0.85em;
         }
 
         .front {
           .icon {
-            size: 24rem;
+            font-size: 4rem;
           }
 
           span {
@@ -321,11 +302,12 @@ export default {
       .back {
         width: 3.2rem;
         height: 3.2rem;
+        padding-top: 0.75em;
       }
 
       .front {
         .icon {
-          size: 1.4rem;
+          font-size: 1.9rem;
         }
 
         span {
@@ -334,18 +316,18 @@ export default {
       }
 
       @media only screen and (min-width: 768px) {
-        min-height: 5.1rem;
-        padding: 3em;
+        min-height: 4.5rem;
+        padding: 2.5em;
 
         .front,
         .back {
-          width: 5.1rem;
-          height: 5.1rem;
+          width: 4.5rem;
+          height: 4.5rem;
         }
 
         .front {
           .icon {
-            size: 9rem;
+            font-size: 2.7rem;
           }
 
           span {

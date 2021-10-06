@@ -21,6 +21,7 @@ export default createStore({
       state.numberOfPlayers = Number(payload.numberOfPlayers);
       state.gridSize = payload.gridSize;
       state.moves = 0;
+      state.time = 0;
     },
     restartGame(state) {
       // only solo game

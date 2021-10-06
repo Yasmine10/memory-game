@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <div class="logo-container">
-      <Logo />
+      <h1 class="white-logo">memory</h1>
     </div>
     <div class="menu-container container">
       <form @submit.prevent="startGame">
@@ -105,12 +105,10 @@
 </template>
 
 <script>
-import Logo from "../components/icons/LogoLight.vue";
 
 export default {
   name: "Home",
   components: {
-    Logo,
   },
   data() {
     return {
@@ -120,6 +118,7 @@ export default {
     };
   },
   created() {
+    this.$store.dispatch("stopTimer");
     this.theme = this.$store.state.theme;
     this.numberOfPlayers = this.$store.state.numberOfPlayers;
     this.gridSize = this.$store.state.gridSize;
@@ -143,7 +142,12 @@ export default {
           numberOfPlayers: this.numberOfPlayers,
           gridSize: this.gridSize,
         })
-        .then(() => this.$router.push("/game"));
+        .then(() => {
+          this.$store.dispatch("setCards");
+          this.$store.dispatch("shuffleCards");
+          this.$store.dispatch("setRemainingPairs", this.$store.getters["getCardPairs"]);
+          this.$router.push("/game");
+        });
     },
   },
 };
@@ -160,7 +164,20 @@ export default {
 
   .logo-container {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3.25em;
+    
+    .white-logo {
+      font-size: 2rem;
+      color: var(--clr-white);
+    }
+    
+    @media only screen and (min-width: 768px) {
+      margin-bottom: 4.25em;
+      
+      .white-logo {
+        font-size: 2.5rem;
+      }
+    }
   }
 
   .menu-container {
@@ -171,6 +188,10 @@ export default {
     .flex {
       display: flex;
       margin-bottom: 2em;
+    }
+    
+    @media only screen and (min-width: 768px) {
+      max-width: 40.875rem;
     }
   }
 }

@@ -34,9 +34,18 @@ export default {
   },
   methods: {
     restartGame() {
-      this.$store.dispatch("restartGame").then(() => this.close());
+      this.$store.dispatch("stopTimer");
+      this.$store.dispatch("resetTimer");
+      this.$store.dispatch("restartGame").then(() => {
+        this.$store.dispatch("startTimer");
+        this.close();
+      });
     },
     newGame() {
+      this.$store.dispatch("stopTimer");
+      this.$store.dispatch("setCards");
+      this.$store.dispatch("shuffleCards");
+      this.$store.dispatch("setRemainingPairs", this.$store.getters["getCardPairs"]);
       this.$router.push("/");
     },
     close() {

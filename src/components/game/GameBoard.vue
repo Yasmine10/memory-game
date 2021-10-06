@@ -48,24 +48,25 @@ export default {
   },
   data() {
     return {
-      cards: [],
-      cardsFlipped: [],
-      numberOfCardsFlipped: 0,
-      moves: 0,
-      remainingPairs: 0,
+      // cards: [],
+      // cardsFlipped: [],
+      // numberOfCardsFlipped: 0,
+      // moves: 0,
+      // remainingPairs: 0,
       showEndGame: false,
     };
   },
   created() {
-    this.$store.dispatch("setCards");
-    this.$store.dispatch("shuffleCards");
+    // this.$store.dispatch("setCards");
+    // this.$store.dispatch("shuffleCards");
+    this.showEndGame = false;
 
-    this.cards = this.$store.state.cards;
-    this.numberOfCardsFlipped = this.$store.state.numberOfCardsFlipped;
-    this.cardsFlipped = this.$store.state.cardsFlipped;
-    this.$store.dispatch("setRemainingPairs", this.cardPairs);
-    this.remainingPairs = this.$store.state.remainingPairs;
-    this.moves = this.$store.state.moves;
+    // this.cards = this.$store.state.cards;
+    // this.numberOfCardsFlipped = this.$store.state.numberOfCardsFlipped;
+    // this.cardsFlipped = this.$store.state.cardsFlipped;
+    // // this.$store.dispatch("setRemainingPairs", this.cardPairs);
+    // this.remainingPairs = this.$store.state.remainingPairs;
+    // this.moves = this.$store.state.moves;
   },
   computed: {
     theme() {
@@ -74,12 +75,45 @@ export default {
     gridSize() {
       return this.$store.state.gridSize;
     },
-    cardPairs() {
-      return this.$store.getters["getCardPairs"];
+    moves() {
+      return this.$store.state.moves;
+    },
+    cards() {
+      return this.$store.state.cards;
+    },
+    cardsFlipped: {
+      get() {
+        return this.$store.state.cardsFlipped;
+      },
+      set(value) {
+        this.$store.dispatch("setCardFlipped", value);
+      }
+    },
+    numberOfCardsFlipped: {
+      get() {
+        return this.$store.state.numberOfCardsFlipped;
+      },
+      set(value) {
+        this.$store.dispatch("setNumberOfCardsFlipped", value);
+      }
+    },
+    remainingPairs: {
+      get() {
+        return this.$store.state.remainingPairs;
+      },
+      set(value) {
+        this.$store.dispatch("setRemainingPairs", value);
+      }
+      
     },
   },
   methods: {
     flipCard(card) {
+
+      if(card.flipped) {
+        return;
+      }
+      
       // check if there are less than 2 flipped cards, then flip card
       if (this.numberOfCardsFlipped < 2) {
         this.numberOfCardsFlipped = this.numberOfCardsFlipped + 1;
@@ -145,8 +179,10 @@ export default {
       }
 
       if (this.remainingPairs === 0) {
-        this.showEndGame = !this.showEndGame;
-        this.$store.dispatch("setIsTimeRunning", false);
+        setTimeout(() => {
+          this.showEndGame = true;
+          this.$store.dispatch("stopTimer");
+        }, 1200 );
       }
     },
   },
@@ -179,6 +215,10 @@ export default {
         border-radius: 50%;
         text-align: center;
         padding-top: 0.75em;
+
+        @media only screen and (min-width: 768px) {
+          padding-top: 1.15em;
+        }
       }
 
       .front {
@@ -243,6 +283,27 @@ export default {
           font-size: 3em;
         }
       }
+
+      @media only screen and (min-width: 768px) {
+        min-height: 7.3rem;
+        padding: 4em;
+
+        .front,
+        .back {
+          width: 7.3rem;
+          height: 7.3rem;
+        }
+
+        .front {
+          .icon {
+            size: 24rem;
+          }
+
+          span {
+            font-size: 5em;
+          }
+        }
+      }
     }
   }
 
@@ -267,6 +328,27 @@ export default {
 
         span {
           font-size: 1.4em;
+        }
+      }
+
+      @media only screen and (min-width: 768px) {
+        min-height: 5.1rem;
+        padding: 3.25em;
+
+        .front,
+        .back {
+          width: 5.1rem;
+          height: 5.1rem;
+        }
+
+        .front {
+          .icon {
+            size: 9rem;
+          }
+
+          span {
+            font-size: 3em;
+          }
         }
       }
     }

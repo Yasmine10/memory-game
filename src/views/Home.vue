@@ -120,6 +120,7 @@ export default {
     };
   },
   created() {
+    this.$store.dispatch("stopTimer");
     this.theme = this.$store.state.theme;
     this.numberOfPlayers = this.$store.state.numberOfPlayers;
     this.gridSize = this.$store.state.gridSize;
@@ -143,7 +144,12 @@ export default {
           numberOfPlayers: this.numberOfPlayers,
           gridSize: this.gridSize,
         })
-        .then(() => this.$router.push("/game"));
+        .then(() => {
+          this.$store.dispatch("setCards");
+          this.$store.dispatch("shuffleCards");
+          this.$store.dispatch("setRemainingPairs", this.$store.getters["getCardPairs"]);
+          this.$router.push("/game");
+        });
     },
   },
 };

@@ -49,7 +49,7 @@ export default {
     };
   },
   created() {
-    this.showEndGame = false;
+    this.showEndGame = true;
   },
   computed: {
     theme() {

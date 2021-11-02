@@ -15,8 +15,12 @@
           <p>{{ moves }} Moves</p>
         </div>
         <div class="btn-group">
-          <button class="btn btn-primary" @click.prevent="restartGame">Restart</button>
-          <button class="btn btn-secondary" @click.prevent="newGame">Setup New Game</button>
+          <button class="btn btn-primary" @click.prevent="restartGame">
+            Restart
+          </button>
+          <button class="btn btn-secondary" @click.prevent="newGame">
+            Setup New Game
+          </button>
         </div>
       </div>
     </div>
@@ -24,7 +28,7 @@
 </template>
 
 <script>
-import {format} from "../../../mixins/formatTime.js";
+import { format } from "../../../mixins/formatTime.js";
 
 export default {
   name: "EndGame",
@@ -50,7 +54,10 @@ export default {
       this.$store.dispatch("stopTimer");
       this.$store.dispatch("setCards");
       this.$store.dispatch("shuffleCards");
-      this.$store.dispatch("setRemainingPairs", this.$store.getters["getCardPairs"]);
+      this.$store.dispatch(
+        "setRemainingPairs",
+        this.$store.getters["getCardPairs"]
+      );
       this.$router.push("/");
     },
     close() {
@@ -78,7 +85,7 @@ export default {
     background-color: var(--clr-light);
     border-radius: 0.9375rem;
     padding: 1.5rem;
-    
+
     @media only screen and (min-width: 768px) {
       padding: 3rem;
     }
@@ -117,15 +124,12 @@ export default {
       .moves {
         margin-bottom: 1.5em;
       }
-      
+
       .btn-group {
         display: flex;
         flex-direction: column;
-        
-        .btn + .btn {
-          margin-left: 1em;
-        }
-  
+        gap: 1rem;
+
         .btn-secondary {
           font-size: 1.125rem;
         }
@@ -135,39 +139,39 @@ export default {
     h3 {
       font-size: 0.8125rem;
     }
-    
+
     @media only screen and (min-width: 767px) {
       h1 {
         font-size: 3rem;
       }
-      
+
       h3 {
         font-size: 1.125rem;
       }
-      
+
       .main {
         margin-top: 2.25em;
-        
-        .time, .moves {
+
+        .time,
+        .moves {
           padding: 1.5em 1.75em;
           border-radius: 0.625rem;
           margin-block: 0.5em;
-          
+
           p {
             font-size: 2rem;
           }
         }
-        
+
         .btn-group {
           flex-direction: row;
           margin-top: 2em;
-          
+
           .btn {
             padding: 0.5em 1.25em;
             font-size: 1.25rem;
             width: 100%;
           }
-          
         }
       }
     }

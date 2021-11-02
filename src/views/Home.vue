@@ -105,7 +105,6 @@
         <button
           class="btn btn-primary btn-full-width"
           type="submit"
-          @click="startGame"
         >
           Start Game
         </button>

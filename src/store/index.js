@@ -5,7 +5,7 @@ export default createStore({
   state: {
     theme: "numbers",
     numberOfPlayers: 1,
-    gridSize: 16,
+    gridSize: 0,
     time: 0,
     timeInterval: null,
     moves: 0,
@@ -19,7 +19,7 @@ export default createStore({
     newGame(state, payload) {
       state.theme = payload.theme;
       state.numberOfPlayers = Number(payload.numberOfPlayers);
-      state.gridSize = payload.gridSize;
+      state.gridSize = Number(payload.gridSize);
       state.moves = 0;
       state.time = 0;
     },
@@ -65,7 +65,6 @@ export default createStore({
     },
     setRemainingPairs(state, payload) {
       state.remainingPairs = Number(payload);
-      console.log(state.remainingPairs);
     },
     setMoves(state, payload) {
       state.moves += Number(payload);

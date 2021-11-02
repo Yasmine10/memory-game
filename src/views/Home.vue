@@ -19,7 +19,13 @@
               <label for="numbers">Numbers</label>
             </div>
             <div class="btn-selection">
-              <input type="radio" id="icons" name="theme" value="icons" v-model="theme" />
+              <input
+                type="radio"
+                id="icons"
+                name="theme"
+                value="icons"
+                v-model="theme"
+              />
               <label for="icons">Icons</label>
             </div>
           </div>
@@ -96,7 +102,11 @@
             </div>
           </div>
         </section>
-        <button class="btn btn-primary btn-full-width" type="submit" @click="startGame">
+        <button
+          class="btn btn-primary btn-full-width"
+          type="submit"
+          @click="startGame"
+        >
           Start Game
         </button>
       </form>
@@ -105,7 +115,6 @@
 </template>
 
 <script>
-
 export default {
   name: "Home",
   data() {
@@ -119,15 +128,12 @@ export default {
     this.$store.dispatch("stopTimer");
     this.theme = this.$store.state.theme;
     this.numberOfPlayers = this.$store.state.numberOfPlayers;
-    this.gridSize = this.$store.state.gridSize;
+    this.gridSize = 16;
   },
   watch: {
-    theme() {
-    },
-    numberOfPlayers() {
-    },
-    gridSize() {
-    },
+    theme() {},
+    numberOfPlayers() {},
+    gridSize() {},
   },
   methods: {
     startGame() {
@@ -140,7 +146,10 @@ export default {
         .then(() => {
           this.$store.dispatch("setCards");
           this.$store.dispatch("shuffleCards");
-          this.$store.dispatch("setRemainingPairs", this.$store.getters["getCardPairs"]);
+          this.$store.dispatch(
+            "setRemainingPairs",
+            this.$store.getters["getCardPairs"]
+          );
           this.$router.push("/game");
         });
     },
@@ -160,15 +169,15 @@ export default {
   .logo-container {
     text-align: center;
     margin-bottom: 3.25em;
-    
+
     .white-logo {
       font-size: 2rem;
       color: var(--clr-white);
     }
-    
+
     @media only screen and (min-width: 768px) {
       margin-bottom: 4.25em;
-      
+
       .white-logo {
         font-size: 2.5rem;
       }
